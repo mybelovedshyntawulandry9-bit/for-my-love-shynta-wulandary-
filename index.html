@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Daily Affirmations for My Lovely muddyy akoo 💖</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&family=Sacramento&display=swap" rel="stylesheet">
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      background: linear-gradient(135deg, #ffe6ea 0%, #ffe5f1 100%);
+      font-family: 'Poppins', sans-serif;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+      padding: 20px;
+      color: #5a3e47;
+    }
+    .card {
+      background: rgba(255, 255, 255, 0.85);
+      backdrop-filter: blur(10px);
+      padding: 30px 25px;
+      border-radius: 24px;
+      box-shadow: 0 15px 35px rgba(255, 182, 193, 0.4);
+      text-align: center;
+      max-width: 380px;
+      width: 100%;
+      border: 2px solid #fff;
+    }
+    h1 {
+      font-family: 'Sacramento', cursive;
+      font-size: 2.3rem;
+      color: #ff6b8b;
+      margin-bottom: 8px;
+    }
+    p.subtitle {
+      font-size: 0.85rem;
+      color: #88606c;
+      margin-bottom: 25px;
+    }
+    .box {
+      background: #fff0f3;
+      border: 2px dashed #ffb3c1;
+      padding: 20px 15px;
+      border-radius: 16px;
+      min-height: 90px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1rem;
+      font-weight: 600;
+      color: #c9184a;
+      margin-bottom: 25px;
+      transition: transform 0.2s ease;
+    }
+    button {
+      background: linear-gradient(45deg, #ff758f, #ff4d6d);
+      color: white;
+      border: none;
+      padding: 12px 24px;
+      font-size: 0.95rem;
+      font-weight: 600;
+      border-radius: 50px;
+      cursor: pointer;
+      box-shadow: 0 6px 15px rgba(255, 77, 109, 0.3);
+      transition: all 0.2s;
+    }
+    button:active { transform: scale(0.95); }
+  </style>
+</head>
+<body>
+
+  <div class="card">
+    <h1>Dear tatakuu... 💕</h1>
+    <p class="subtitle">Klik tombol di bawah tiap kali kamu kangen aku yaaa -calonnsuamimu adittyaaa hehehehe!</p>
+    
+    <div class="box" id="affirmationBox">
+      ✨ Klik tombol di bawah ya ndut! ✨
+    </div>
+
+    <button onclick="generateAffirmation()">Ambil Afirmasi Hari Ini 💌</button>
+  </div>
+
+  <script>
+    const listAfirmasi = [
+      "sayangkuuu muddykuuu ,kalau aku boleh jujur meski aku gasuka matcha tapi kamu jauh lebih manis dan lebih indah dari matcha favorit kamu itu karna kamu favorit nya aku! 🍵🩷",
+      "kurang beruntung apa aku dapetin kamu ya baby aku so happy akuu huhuu. 🤍",
+      "kalau baby aku ngerasa cape,suka sakit dadaa, istirahat dulu yaa dari semua aktivitas nya🥺. Kamu udah berusaha maksimal banget hari ini! dan aku selalu bangga sama kamu🌟",
+      "Kamu selalu cukup, bahkan lebih dari cukup. Jangan ragu sama diri sendiri! 🌷",
+      "ayangg kamu pas cemberut aja lucu dan cantik sekali yaa aku liat liat, apalagi kalau prengat prenguttt! 🫠💗",
+      "semangat terus yaa babyy akuu hari ini! Ada aku yang selalu bangga sama kamu,dan selalu sayang kamu!!. 🧸🌸"
+    ];
+
+    function generateAffirmation() {
+      const box = document.getElementById("affirmationBox");
+      const acak = Math.floor(Math.random() * listAfirmasi.length);
+      box.style.transform = "scale(0.95)";
+      setTimeout(() => {
+        box.innerText = listAfirmasi[acak];
+        box.style.transform = "scale(1)";
+      }, 100);
+    }
+  </script>
+
+</body>
+</html>
