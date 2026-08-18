@@ -16,7 +16,43 @@
       min-height: 100vh;
       padding: 20px;
       color: #5a3e47;
+      overflow-x: hidden;
+      position: relative;
     }
+
+    /* Modal Buka Pesan & Play Musik */
+    .welcome-overlay {
+      position: fixed;
+      top: 0; left: 0; width: 100%; height: 100%;
+      background: rgba(255, 230, 235, 0.98);
+      backdrop-filter: blur(8px);
+      z-index: 999;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      padding: 20px;
+    }
+    .welcome-overlay h2 {
+      font-family: 'Sacramento', cursive;
+      font-size: 2.5rem;
+      color: #ff4d6d;
+      margin-bottom: 10px;
+    }
+    .welcome-btn {
+      background: linear-gradient(45deg, #ff758f, #ff4d6d);
+      color: white;
+      border: none;
+      padding: 14px 28px;
+      font-size: 1rem;
+      font-weight: 600;
+      border-radius: 50px;
+      cursor: pointer;
+      box-shadow: 0 8px 20px rgba(255, 77, 109, 0.4);
+      margin-top: 15px;
+    }
+
     .card {
       background: rgba(255, 255, 255, 0.85);
       backdrop-filter: blur(10px);
@@ -27,6 +63,7 @@
       max-width: 380px;
       width: 100%;
       border: 2px solid #fff;
+      z-index: 1;
     }
     h1 {
       font-family: 'Sacramento', cursive;
@@ -39,6 +76,37 @@
       color: #88606c;
       margin-bottom: 25px;
     }
+
+    /* Styling Galeri Foto Polaroid */
+    .gallery {
+      display: flex;
+      flex-direction: column;
+      gap: 15px;
+      margin-bottom: 25px;
+    }
+    .polaroid {
+      background: white;
+      padding: 10px 10px 18px 10px;
+      border-radius: 12px;
+      box-shadow: 0 8px 15px rgba(0,0,0,0.06);
+      transform: rotate(-2deg);
+    }
+    .polaroid:nth-child(even) {
+      transform: rotate(2deg);
+    }
+    .polaroid img {
+      width: 100%;
+      height: 220px;
+      object-fit: cover;
+      border-radius: 8px;
+    }
+    .polaroid p {
+      font-family: 'Sacramento', cursive;
+      font-size: 1.3rem;
+      color: #ff4d6d;
+      margin-top: 6px;
+    }
+
     .box {
       background: #fff0f3;
       border: 2px dashed #ffb3c1;
@@ -67,29 +135,75 @@
       transition: all 0.2s;
     }
     button:active { transform: scale(0.95); }
+
+    /* Animasi Heart */
+    .heart-float {
+      position: fixed;
+      color: #ff758f;
+      font-size: 20px;
+      user-select: none;
+      pointer-events: none;
+      animation: floatUp 4s linear infinite;
+      z-index: 0;
+    }
+    @keyframes floatUp {
+      0% { transform: translateY(100vh) scale(0.5); opacity: 1; }
+      100% { transform: translateY(-10vh) scale(1.2); opacity: 0; }
+    }
   </style>
 </head>
 <body>
 
+  <!-- Audio Background -->
+  <audio id="bgMusic" loop>
+    <source src="lagu.mp3" type="audio/mpeg">
+  </audio>
+
+  <!-- Layer Popup Buka Musik -->
+  <div class="welcome-overlay" id="welcomeModal">
+    <h2>Pesan Buat Sinta 💌</h2>
+    <p style="font-size: 0.85rem; color: #88606c;">Nyalain volume HP kamu yaa ✨</p>
+    <button class="welcome-btn" onclick="startWeb()">Buka Disini 💖</button>
+  </div>
+
   <div class="card">
-    <h1>Dear tatakuu... 💕</h1>
-    <p class="subtitle">Klik tombol di bawah tiap kali kamu kangen aku yaaa -calonnsuamimu adittyaaa hehehehe!</p>
+    <h1>Dear Sintaku... 💕</h1>
+    <p class="subtitle">klik tombol di bawah tiap kali kamu kangen aku yaaa ~calonsuamimu adittyaaa hehehehe!~</p>
+
+    <!-- Galeri Foto Kamu & Sinta -->
+    <div class="gallery">
+      <div class="polaroid">
+        <img src="foto1.jpg" alt="Foto Sinta 1">
+        <p>You & Me 💖</p>
+      </div>
+      <div class="polaroid">
+        <img src="foto2.jpg" alt="Foto Sinta 2">
+        <p>Senyum favorit aku 🌸</p>
+      </div>
+    </div>
     
     <div class="box" id="affirmationBox">
-      ✨ Klik tombol di bawah ya ndut! ✨
+      ✨ Klik tombol di bawah ya edut! ✨
     </div>
 
     <button onclick="generateAffirmation()">Ambil Afirmasi Hari Ini 💌</button>
   </div>
 
   <script>
+    function startWeb() {
+      document.getElementById('welcomeModal').style.display = 'none';
+      document.getElementById('bgMusic').play();
+      setInterval(createHeart, 400);
+    }
+
+    /* Kata-kata afirmasi asli milikmu */
     const listAfirmasi = [
-      "sayangkuuu muddykuuu ,kalau aku boleh jujur meski aku gasuka matcha tapi kamu jauh lebih manis dan lebih indah dari matcha favorit kamu itu karna kamu favorit nya aku! 🍵🩷",
-      "kurang beruntung apa aku dapetin kamu ya baby aku so happy akuu huhuu. 🤍",
-      "kalau baby aku ngerasa cape,suka sakit dadaa, istirahat dulu yaa dari semua aktivitas nya🥺. Kamu udah berusaha maksimal banget hari ini! dan aku selalu bangga sama kamu🌟",
-      "Kamu selalu cukup, bahkan lebih dari cukup. Jangan ragu sama diri sendiri! 🌷",
-      "ayangg kamu pas cemberut aja lucu dan cantik sekali yaa aku liat liat, apalagi kalau prengat prenguttt! 🫠💗",
-      "semangat terus yaa babyy akuu hari ini! Ada aku yang selalu bangga sama kamu,dan selalu sayang kamu!!. 🧸🌸"
+      "sayangkuu muddyykuuu, kalau aku boleh jujur meski aku garasa matcha tapi kamu jauh lebih manis dan lebih indah dari matcha favorit kamu itu karna kamu favorit nya akuuu 🤍✨.",
+      "kurang beruntung apa aku dapetin kamu ya baby aku so happy akuu huhuu 🥹🤍.",
+      "kalau baby aku ngerasa capek,suka sakit badan, istirahat dulu yaa dari semua aktivitas nyaa😊. Kamu udah berusaha maksimal banget hari ini!! dan aku selalu bangga sama kamuu💓.",
+      "kamu selalu cukup, bahkan lebih dari cukup. jangan ragu sama diri sendiri! 🌷.",
+      "sayangg kamu pas cemberut aja lucu dan cantik sekali yaa aku lihat lihat, apalagi kalau jengat jengattt!! 🥰💖.",
+      "semangat terus yaa babyy akuu hari ini!! Ada aku yang selalu bangga sama kamu,dan selalu sayang kamu!! 🧸🌸"
     ];
 
     function generateAffirmation() {
@@ -100,6 +214,17 @@
         box.innerText = listAfirmasi[acak];
         box.style.transform = "scale(1)";
       }, 100);
+    }
+
+    function createHeart() {
+      const heart = document.createElement('div');
+      heart.classList.add('heart-float');
+      heart.innerHTML = ['💖', '🌸', '✨', '💕', '🥰'][Math.floor(Math.random() * 5)];
+      heart.style.left = Math.random() * 100 + 'vw';
+      heart.style.animationDuration = Math.random() * 2 + 3 + 's';
+      document.body.appendChild(heart);
+
+      setTimeout(() => { heart.remove(); }, 5000);
     }
   </script>
 
